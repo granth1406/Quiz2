@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 15px #ff00ff; }
+            50% { text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff; }
+            100% { text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 15px #ff00ff; }
+        }
+        body {
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            background-color: black; 
+            font-family: Arial, sans-serif; 
+            color: white;
+        }
+        .masterContainer {
+            background: black; 
+            padding: 20px; 
+            border-radius: 10px; 
+            box-shadow: 0px 0px 20px #ff00ff; 
+            max-width: 400px; 
+            text-align: center;
+        }
+        #graphicImage {
+            width: 100px; 
+            height: auto;
+        }
+        .boxItems img {
+            width: 80px; 
+            height: auto;
+        }
+        .boxItems p {
+            font-size: 18px; 
+            font-weight: bold; 
+            animation: glow 1.5s infinite alternate;
+        }
+        .inputs label {
+            display: block; 
+            font-weight: bold;
+        }
+        .inputs input {
+            width: 100%; 
+            padding: 8px; 
+            border: 1px solid #ff00ff; 
+            border-radius: 5px; 
+            background: black; 
+            color: white;
+        }
+        #submitButton {
+            width: 100%; 
+            padding: 10px; 
+            background-color: #ff00ff; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            font-size: 16px; 
+            transition: transform 0.2s;
+        }
+        #submitButton:hover {
+            transform: scale(1.1);
+        }
+        #log-on a {
+            color: #00ffff; 
+            text-decoration: none; 
+            animation: glow 1.5s infinite alternate;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="masterContainer">
+            <div id="loginbox">
+                <div class="boxArea" id="graphic">
+                    <img src="./Graphic designing/flowers.png" alt="" id="graphicImage">
+                    <p>it's good to have you back</p>
+                </div>
+                <div class="boxArea" id="LoginArea">
+                    <form id="loginForm">
+                        <div class="boxItems">
+                            <img src="./Graphic designing/logo_small.png" alt="">
+                        </div>
+                        <div class="boxItems">
+                            <p>Welcome User</p>
+                        </div>
+                        <div class="boxItems inputs">
+                            <label for="username">Username</label>       
+                            <input type="text" id="username" required>
+                        </div>
+                        <div class="boxItems inputs">
+                            <label for="pword">Password</label>  
+                            <input type="password" id="pword" required>
+                        </div>
+                        <div class="boxItems">                            
+                            <input type="submit" value="SIGN IN" id="submitButton">      
+                        </div>
+                        <div class="boxItems" id="log-on">
+                            <p>New to Fortunez? <a href="./signup.html">Create Account</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- JavaScript -->
+    <script>
+        let form = document.getElementById("loginForm");
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("pword").value;
+            let storedUsers = JSON.parse(localStorage.getItem("users")) || [];
+            let userFound = storedUsers.find((user) => user.username === username && user.password === password);
+            if (userFound) {
+                alert(`Login successful! Welcome back, ${userFound.username}`);
+                window.location.href = "index.html";
+            } else {
+                alert("Login failed! Invalid username or password.");
+            }
+        });
+    </script>
+</body>
+</html>
